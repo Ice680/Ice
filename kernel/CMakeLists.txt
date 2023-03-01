@@ -15,7 +15,7 @@ target_compile_options(
     -fshort-wchar
     -ffreestanding
     -fsized-deallocation
-    -fuse-ld=lld
+    # -fuse-ld=lld
 
     -fno-pic
     -fno-pie
@@ -48,11 +48,10 @@ target_compile_options(
 
 target_link_options(
     kernel PRIVATE
-    -Wl,-T,${CMAKE_CURRENT_SOURCE_DIR}/arch/${ARCH}/linker-${ARCH}.ld
-    -Wl,-z,max-page-size=0x1000
+    -T${CMAKE_CURRENT_SOURCE_DIR}/arch/${ARCH}/linker-${ARCH}.ld
+    -zmax-page-size=0x1000
     -nostdlib
     -static
-    -target x86_64-pc-elf
 )
-target_include_directories(kernel PRIVATE src/)
+target_include_directories(kernel PRIVATE include)
 # target_link_libraries(kernel PRIVATE assembly)

@@ -30,8 +30,12 @@
 *.exe
 *.out
 *.app
+*.iso
+*.elf
 
 # folders
 .vscode/
 build/
 .cache/
+
+build-comment.txt
