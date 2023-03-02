@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(
     kernel
-    kmain.cpp
+    kernel.cpp
+    drivers/graphics/printf.cpp
+    drivers/graphics/terminal.cpp
 )
 set_target_properties(kernel PROPERTIES OUTPUT_NAME ${PROJECT_NAME}.elf)
 target_compile_definitions(kernel PRIVATE ${ARCH})
@@ -30,15 +32,11 @@ target_compile_options(
     -Wall
     -Wextra
     -Werror
-    -Wno-volatile
+    # -Wno-volatile
     -Wno-macro-redefined
     -Wno-non-virtual-dtor
     -Wno-unused-parameter
     -Wno-builtin-macro-redefined
-    -Wno-error-depracted-enum-enum-conversion
-    
-    -mno-sse
-    -mno-sse2
     
     -mcmodel=kernel
     

@@ -82,7 +82,6 @@ if(QEMU_PROGRAM)
         # Use stdio as serial input and output
         # This allows debug messages to reach the terminal
         -serial stdio
-        # -display gtk,gl=off
         -boot d
     )
     
