@@ -17,11 +17,13 @@ extern "C" void _start(void) {
     
     terminal::init();
     terminal::print("Hello World!\n");
+    terminal::cursor_down();
     terminal::printi(123);
-    terminal::clear("\033[2m");
-    terminal::reset();
+    terminal::cursor_right(5);
     terminal::print("Hello World!\n");
+    terminal::cursor_up(6);
     terminal::printi(123);
-
+    terminal::cursor_left(10);
+    
     done();
 }

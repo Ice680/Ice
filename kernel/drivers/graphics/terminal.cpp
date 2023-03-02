@@ -78,6 +78,22 @@ void center(const char* text, limine_terminal* term) {
     for (uint64_t i = 0; i < term->columns / 2 - strlen(text) / 2; i++)
         printc(' ');
 }
+
+void cursor_up(int lines, limine_terminal* term) {
+    printf(term, "\033[dA", lines);
+}
+
+void cursor_down(int lines, limine_terminal* term) {
+    printf(term, "\033[%dB", lines);
+}
+
+void cursor_right(int lines, limine_terminal* term) {
+    printf(term, "\033[%dC", lines);
+}
+
+void cursor_left(int lines, limine_terminal* term) {
+    printf(term, "\033[%dD", lines);
+}
 }  // namespace drivers::display::terminal
 
 void putchar(char c) {
