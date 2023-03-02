@@ -6,7 +6,7 @@ volatile limine_terminal_request terminal_request = {
     .id = LIMINE_TERMINAL_REQUEST,
     .revision = 0};
 
-void done(void) {
+void done() {
     for (;;) {
         asm("hlt");
     }
@@ -16,11 +16,11 @@ extern "C" void _start(void) {
     using namespace drivers::display;
     
     terminal::init();
-    terminal::print("Hello World!");
+    terminal::print("Hello World!\n");
     terminal::printi(123);
     terminal::clear("\033[2m");
     terminal::reset();
-    terminal::print("Hello World!");
+    terminal::print("Hello World!\n");
     terminal::printi(123);
 
     done();
