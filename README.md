@@ -11,7 +11,7 @@ $ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_
 $ ninja -C build run_qemu
 ```
 
-## Prerequisites
+## Dependencies
 * CMake (version 3.12 or newer)
 * LLVM + Clang + LLD (14.x+)
 * Ninja-build
