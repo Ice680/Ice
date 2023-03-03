@@ -1,12 +1,9 @@
 # Ice
 
-## Testing
-> I know there's a much better and simpler way to do this. But this works for now. - Ice680
-
+## Building and Testing
 ```sh 
-$ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -S . -B build -G Ninja -DCMAKE_LINKER=ld.lld -DCMAKE_CXX_LINK_EXECUTABLE="<CMAKE_LINKER> <FLAGS> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>"
+$ cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -S . -B build -G Ninja"
 ```
-
 ```sh
 $ ninja -C build run_qemu
 ```
