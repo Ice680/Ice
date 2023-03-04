@@ -1,4 +1,5 @@
 # Ice
+A x86_64 operating system
 
 ## Building and Testing
 ```sh 

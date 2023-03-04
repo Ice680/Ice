@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # TODO: better project name
-project(Ice VERSION 0.0.1 LANGUAGES C CXX ASM)
+project(Ice VERSION 0.0.1 LANGUAGES C CXX ASM_NASM)
 
 include(cmake/config.cmake)
 
