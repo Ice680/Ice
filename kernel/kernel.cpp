@@ -17,11 +17,10 @@ void done() {
 extern "C" void _start(void) {
     drivers::display::terminal::init();
 
-    system::gdt::gdt ggdt;
-    system::gdt::gdt_descriptor_t gdt_descriptor{ggdt};
-    gdt_descriptor.load();
-
-    drivers::display::terminal::print("\n\t Hello World!");
+    system::gdt::init();
+    drivers::display::terminal::print("Loaded GDT\n");
+    
+    drivers::display::terminal::print("\nHello World!");
 
     done();
 }

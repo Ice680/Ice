@@ -4,7 +4,7 @@ add_library(
     assembly
     arch/${ARCH}/gdt/gdt.asm
 )
-string(APPEND CMAKE_ASM_NASM_COMPILE_OBJECT " -f elf64")
+string(APPEND CMAKE_ASM_NASM_COMPILE_OBJECT " -f elf64 -g")
 
 add_executable(
     kernel
@@ -20,6 +20,7 @@ set_target_properties(kernel PROPERTIES OUTPUT_NAME ${PROJECT_NAME}.elf)
 target_compile_definitions(kernel PRIVATE ${ARCH})
 target_compile_options(
     kernel PRIVATE
+    -g
     -fshort-wchar
     -ffreestanding
     -fsized-deallocation

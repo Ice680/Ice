@@ -7,10 +7,10 @@ inline void* operator new(size_t, void* p) {
 }
 
 namespace std {
-    template<typename T>
-    [[nodiscard]] constexpr T* launder(T* p) noexcept {
-        return __builtin_launder(p);
-    }
-
-    enum class align_val_t : size_t {};
+template <typename T>
+[[nodiscard]] constexpr T* launder(T* p) noexcept {
+    return __builtin_launder(p);
 }
+
+enum class align_val_t : size_t {};
+}  // namespace std

@@ -1,13 +1,31 @@
-global load_gdt
-load_gdt:
+bits 64
+
+global gdt64_load
+global gdt64_32trampoline
+
+gdt64_load:
     lgdt [rdi]
-    mov ax, 0x10
-    mov ss, ax
-    mov ds, ax
-    mov es, ax
-    mov rax, qword .trampoline
-    push qword 0x8
-    push rax
-    o64 retf
+
+    push rbp
+    mov rbp, rsp
+
+    push rsi
+    push rbp
+    pushfq
+
+    push rdx
+    push .trampoline
+
+    iretq
+
 .trampoline:
+    pop rbp
+
+    ; flush the registers
+    mov ss, rsi
+    mov gs, rsi
+    mov fs, rsi
+    mov ds, rsi
+    mov es, rsi
+
     ret
