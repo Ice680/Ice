@@ -1,16 +1,19 @@
 set(CMAKE_CXX_STANDARD 20)
 
 add_library(
-assembly
-arch/${ARCH}/gdt/gdt.asm
+    assembly
+    arch/${ARCH}/gdt/gdt.asm
 )
 string(APPEND CMAKE_ASM_NASM_COMPILE_OBJECT " -f elf64")
 
 add_executable(
     kernel
     kernel.cpp
+
     drivers/graphics/printf.cpp
     drivers/graphics/terminal.cpp
+    libs/libc/string.cpp
+
     arch/${ARCH}/gdt/gdt.cpp
 )
 set_target_properties(kernel PROPERTIES OUTPUT_NAME ${PROJECT_NAME}.elf)
@@ -43,7 +46,7 @@ target_compile_options(
     -Wno-builtin-macro-redefined
 
     -mcmodel=kernel
-    
+
     -target x86_64-pc-elf
     -c
 )
@@ -56,5 +59,6 @@ target_link_options(
     -static
     -Bsymbolic
 )
-target_include_directories(kernel PRIVATE include)
+
+target_include_directories(kernel PRIVATE include include/libs/libc include/libs/std)
 target_link_libraries(kernel PRIVATE assembly)

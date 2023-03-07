@@ -68,7 +68,7 @@ if(QEMU_PROGRAM)
         #      Denverton, Dhyana, EPYC, Haswell, IvyBridge, kvm64, max,
         #      Nehalem, Penryn, qemu64, SandyBridge, Skylake-[Client|Server],
         #      Snowridge, Westmere
-        # -cpu qemu64
+        -cpu qemu64
         # Multiple processors (commented until utilized).
         #-smp 8,sockets=2,cores=2,threads=2,maxcpus=8
         # One hundred megabytes of RAM.
@@ -81,6 +81,7 @@ if(QEMU_PROGRAM)
         # -d cpu_reset
         # Use stdio as serial input and output
         # This allows debug messages to reach the terminal
+        # -serial stdio
         -serial stdio
         -boot d
     )

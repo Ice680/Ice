@@ -1,0 +1,11 @@
+#pragma once
+
+namespace std {
+template <class T>
+T* addressof(const T&&) noexcept = delete;
+
+template <class T>
+T* addressof(T& r) noexcept {
+    return __builtin_addressof(r);
+}
+}  // namespace std

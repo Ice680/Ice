@@ -1,4 +1,3 @@
-#include "arch/x86_64/gdt/gdt.hpp"
 #include <arch/arch.hpp>
 #include <drivers/graphics/terminal.hpp>
 
@@ -14,7 +13,5 @@ gdt::gdt() {
     entries[3] = {PRESENT | SEGMENT | READ_WRITE | USER, 0};
     entries[4] = {PRESENT | SEGMENT | READ_WRITE | EXECUTABLE | USER,
                   LONG_MODE};
-
-    drivers::display::terminal::print("\033[0;32m[Loaded]\033[0m GDT\n\t");
 }
 }  // namespace system::gdt
