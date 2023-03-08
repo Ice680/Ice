@@ -1,8 +1,8 @@
-#include <drivers/graphics/printf.h>
-#include <kernel.hpp>
 #include <limine.h>
-#include <drivers/graphics/terminal.hpp>
+#include <stdio.h>
 #include <string.h>
+#include <drivers/graphics/terminal.hpp>
+#include <kernel.hpp>
 
 namespace drivers::display::terminal {
 limine_terminal** terminals;

@@ -1,8 +1,8 @@
-#include <drivers/graphics/printf.h>
 #include <limine.h>
 #include <arch/arch.hpp>
 #include <drivers/graphics/terminal.hpp>
 #include <kernel.hpp>
+#include <stdio.h>
 
 volatile limine_terminal_request terminal_request = {
     .id = LIMINE_TERMINAL_REQUEST,
@@ -10,7 +10,7 @@ volatile limine_terminal_request terminal_request = {
 
 void done() {
     for (;;) {
-        asm("hlt");
+        system::cpu::halt();
     }
 }
 
@@ -18,9 +18,12 @@ extern "C" void _start(void) {
     drivers::display::terminal::init();
 
     system::gdt::init();
-    drivers::display::terminal::print("Loaded GDT\n");
-    
-    drivers::display::terminal::print("\nHello World!");
+    system::idt::init();
+
+    system::cpu::interrupts_enable();
+
+    printf("\nHello World!");
+    putchar('\n');
 
     done();
 }

@@ -4,7 +4,7 @@ global gdt64_load
 global gdt64_32trampoline
 
 gdt64_load:
-    lgdt [rdi]
+    lgdt [rdi] ; gdt64_load -> rdi is the first argument passed
 
     push rbp
     mov rbp, rsp
