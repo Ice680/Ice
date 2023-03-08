@@ -1,13 +1,30 @@
+#include <source_location>
 #include <sys/logger.hpp>
 #include <sys/panic.hpp>
-#include <source_location>
-#include "arch/x86_64/cpu/cpu.hpp"
+#include <stdio.h>
 
-[[noreturn]] void panic(const char* error, void* stacktrace_addr, const std::source_location location) {
-    system::cpu::interrupts_disable();
-    
-    logger::log_error("Kernel panic - %s", error);
-    logger::log_error("Panicked in file %s:%d:%d in the function '%s()", location.file_name(), location.line(), location.column(), location.function_name());
+namespace panic {
+[[noreturn]] void panic(const char* file, int line, const char* func,
+                        const char* message) {
+    printf("\n");
+    logger::log_error("%s", message);
+    logger::log_error("File: %s", file);
+    logger::log_error("Line: %s", line);
+    logger::log_error("Function: %s", func);
+    logger::log_error("System halted!");
 
-    while(true) system::cpu::halt();
+    system::cpu::halt();
 }
+
+[[noreturn]] void panic(const char* message) {
+    printf("\n");
+    logger::log_error("%s", message);
+    logger::log_error("System halted!");
+
+    system::cpu::halt();
+}
+
+extern "C" [[noreturn]] void abort() noexcept {
+    panic("abort()");
+}
+}  // namespace panic

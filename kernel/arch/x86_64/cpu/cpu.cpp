@@ -9,7 +9,8 @@ void interrupts_disable() {
     asm volatile("cli");
 }
 
-void halt() {
-    asm volatile("hlt");
+void halt(bool ints) {
+    if(ints) while(true) asm volatile("hlt");
+    else while(true) asm volatile("cli; hlt");
 }
 }  // namespace system::cpu

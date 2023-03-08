@@ -5,7 +5,7 @@
 namespace system::cpu {
 void interrupts_enable();
 void interrupts_disable();
-void halt();
+[[noreturn]] void halt(bool ints = false);
 
 struct cpu_interrupt_state_t {
     uint64_t r15;

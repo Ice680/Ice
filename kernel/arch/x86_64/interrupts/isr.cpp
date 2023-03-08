@@ -68,7 +68,6 @@ extern "C" uint64_t isr_handler(uint64_t rsp) {
         isr_register_dump(cpu);
 
         for (;;) {
-            system::cpu::interrupts_disable();
             system::cpu::halt();
         }
     } else if (cpu->isr_number >= 32 &&
@@ -84,7 +83,6 @@ extern "C" uint64_t isr_handler(uint64_t rsp) {
         }
 
         for (;;) {
-            system::cpu::interrupts_disable();
             system::cpu::halt();
         }
     } else if (cpu->isr_number == SYSCALL_INT) {  // handle syscalls
@@ -95,7 +93,6 @@ extern "C" uint64_t isr_handler(uint64_t rsp) {
         isr_register_dump(cpu);
 
         for (;;) {
-            system::cpu::interrupts_disable();
             system::cpu::halt();
         }
     } else {  // handle unknown interrupts
@@ -105,7 +102,6 @@ extern "C" uint64_t isr_handler(uint64_t rsp) {
         isr_register_dump(cpu);
 
         for (;;) {
-            system::cpu::interrupts_disable();
             system::cpu::halt();
         }
     }

@@ -1,7 +1,11 @@
 #pragma once
 
-#include <source_location>
+#include <arch/arch.hpp>
+#include <sys/logger.hpp>
 
-[[noreturn]] void panic(
-    const char* error, void* stacktrace_addr = nullptr,
-    const std::source_location location = std::source_location());
+namespace panic {
+[[noreturn]] void panic(const char* file, int line, const char* func,
+                        const char* message);
+[[noreturn]] void panic(const char* message);
+extern "C" [[noreturn]] void abort() noexcept;
+}  // namespace panic
