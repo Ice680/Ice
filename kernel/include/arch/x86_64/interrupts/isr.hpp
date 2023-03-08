@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 #include <arch/x86_64/cpu/cpu.hpp>
 
 #define LAPIC_TIMER_INT 32

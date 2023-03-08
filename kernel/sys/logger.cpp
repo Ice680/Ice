@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <sys/logger.hpp>
 
 #define COLOR_BLUE "\033[1;34m"

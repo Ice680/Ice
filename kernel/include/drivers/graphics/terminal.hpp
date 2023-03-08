@@ -1,10 +1,9 @@
 #pragma once
 
-#include <drivers/graphics/printf.h>
 #include <limine.h>
 #include <stdarg.h>
-#include <stdint.h>
-#include <common/math.hpp>
+#include <cstdint>
+#include <cstdio>
 
 namespace drivers::display::terminal {
 extern limine_terminal** terminals;

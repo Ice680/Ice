@@ -1,6 +1,6 @@
 #include <limine.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <drivers/graphics/terminal.hpp>
 #include <kernel.hpp>
 
