@@ -1,6 +1,7 @@
 #pragma once
 
-#include <stddef.h>
+#include <cstddef>
+#include <cstdint>
 
 namespace std {
 
@@ -733,4 +734,11 @@ struct __conditional<false> {
 
 template <bool C, typename I, typename E>
 using __conditional_t = typename __conditional<C>::template type<I, E>;
+
+template <std::size_t Size, std::size_t Align>
+struct alignas(Align) aligned_storage {
+    constexpr aligned_storage() : buffer{0} {}
+
+    char buffer[Size];
+};
 }  // namespace std

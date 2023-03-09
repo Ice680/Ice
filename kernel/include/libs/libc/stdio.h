@@ -3,6 +3,10 @@
 #include <stdarg.h>
 #include <stddef.h>
 
+#if __cplusplus
+extern "C" {
+#endif
+
 void putchar(char c);
 
 int printf(const char* format, ...);
@@ -18,3 +22,7 @@ int fctprintf(void (*out)(char c, void* extra_arg), void* extra_arg,
               const char* format, ...);
 int vfctprintf(void (*out)(char c, void* extra_arg), void* extra_arg,
                const char* format, va_list arg);
+
+#if __cplusplus
+}
+#endif

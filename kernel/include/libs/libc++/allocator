@@ -1,0 +1,42 @@
+#pragma once
+
+#include <new>
+#include <type_traits>
+#include <utility>
+
+namespace std {
+template <typename T>
+class allocator {
+   public:
+    constexpr allocator() : initialized(false) {}
+
+    template <typename... Args>
+    void initialize(Args&&... args) {
+        new (&storage) T(std::forward<Args>(args)...);
+        initialized = true;
+    }
+
+    template <typename F, typename... Args>
+    void construct_with(F f) {
+        new (&storage) T{f()};
+        initialized = true;
+    }
+
+    void destruct() {
+        get()->T::~T();
+        initialized = false;
+    }
+
+    T* get() { return launder(reinterpret_cast<T*>(&storage)); }
+
+    explicit operator bool() { return initialized; }
+
+    T* operator->() { return get(); }
+
+    T& operator*() { return *get(); }
+
+   private:
+    aligned_storage<sizeof(T), alignof(T)> storage;
+    bool initialized;
+};
+}  // namespace std

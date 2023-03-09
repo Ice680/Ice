@@ -16,6 +16,8 @@ add_executable(
 
     libs/libc/stdio.cpp
     libs/libc/string.cpp
+    libs/libc/ctype.cpp
+    libs/libc/stdlib.cpp
 
     arch/${ARCH}/gdt/gdt.cpp
     arch/${ARCH}/cpu/cpu.cpp
@@ -24,6 +26,11 @@ add_executable(
 
     sys/logger.cpp
     sys/panic.cpp
+
+    memory/memory.cpp
+    memory/physical.cpp
+
+    utils/bitmap.cpp
 )
 set_target_properties(kernel PROPERTIES OUTPUT_NAME ${PROJECT_NAME}.elf)
 target_compile_definitions(kernel PRIVATE ${ARCH})

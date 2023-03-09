@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <cstdint>
 
-extern volatile limine_terminal_request terminal_request;
+extern uintptr_t hhdm_offset;
 
-void main();
+extern volatile limine_hhdm_request hhdm_request;
+extern volatile limine_terminal_request terminal_request;
+extern volatile limine_memmap_request memmap_request;

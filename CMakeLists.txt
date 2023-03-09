@@ -71,8 +71,8 @@ if(QEMU_PROGRAM)
         -cpu qemu64
         # Multiple processors (commented until utilized).
         #-smp 8,sockets=2,cores=2,threads=2,maxcpus=8
-        # One hundred megabytes of RAM.
-        -m 2G
+        # One hundred twenty eight megabytes of RAM.
+        -m 128M
         # Use local time as real time clock base 
         # -rtc base=localtime,clock=host,driftfix=none
         # No networking drivers yet.

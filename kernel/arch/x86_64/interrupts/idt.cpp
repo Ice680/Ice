@@ -23,6 +23,8 @@ void create_entry(uint8_t index, uint8_t type_attributes) {
 }
 
 void init() {
+    logger::log_info("Initializing IDT");
+
     uint16_t i = 0;
 
     // exceptions
@@ -44,8 +46,6 @@ void init() {
 
     system::cpu::
         interrupts_enable();  // store interrupt flag -> allow hardware interrupts
-
-    logger::log_info("Initialized IDT");
 }
 
 void load() {

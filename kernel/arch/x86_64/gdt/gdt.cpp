@@ -15,7 +15,7 @@ gdt_descriptor_t _gdt_descriptor = {
     .offset = reinterpret_cast<uint64_t>(&_gdt)};
 
 void init() {
-    logger::log_info("Starting GDT");
+    logger::log_info("Initializing GDT");
     _gdt.gdt[0] = create_entry(0, 0, 0, 0);
 
     _gdt.gdt[KERNEL_CODE_SELECTOR] = create_entry(

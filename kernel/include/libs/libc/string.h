@@ -2,7 +2,10 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#if __cplusplus
 extern "C" {
+#endif
+
 size_t strlen(const char* str);
 size_t strnlen(const char* str, size_t len);
 
@@ -24,4 +27,7 @@ void* memcpy(void* dest, const void* src, size_t len);
 void* memmove(void* dest, const void* src, size_t len);
 void* memset(void* dest, int ch, size_t len);
 void* memchr(const void* ptr, int ch, size_t len);
+
+#if __cplusplus
 }
+#endif

@@ -2,8 +2,10 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <kernel.hpp>
 #include <type_traits>
 
+namespace utils {
 struct point {
     size_t x = 0;
     size_t y = 0;
@@ -48,3 +50,19 @@ template <typename Type>
 constexpr Type sign(Type num) {
     return (num > 0) ? 1 : ((num < 0) ? -1 : 0);
 }
+
+template <typename Type>
+constexpr inline bool ishh(Type a) {
+    return uintptr_t(a) >= hhdm_offset;
+}
+
+template <typename Type>
+constexpr inline Type tohh(Type a) {
+    return ishh(a) ? a : Type(uintptr_t(a) + hhdm_offset);
+}
+
+template <typename Type>
+constexpr inline Type fromhh(Type a) {
+    return !ishh(a) ? a : Type(uintptr_t(a) - hhdm_offset);
+}
+}  // namespace utils

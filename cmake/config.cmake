@@ -10,5 +10,5 @@ set_property(CACHE MACHINE PROPERTY STRINGS "PC" "QEMU")
 option(QEMU_DEBUG "Start QEMU with `-S -s` flags, halting startup until a debugger has been attached." OFF)
 
 # Set linker
-set(CMAKE_LINKER "ld.lld" CACHE STRING "Linker to use while linking object files")
+set(CMAKE_LINKER "ld.lld-17" CACHE STRING "Linker to use while linking object files")
 set(CMAKE_CXX_LINK_EXECUTABLE "<CMAKE_LINKER> <FLAGS> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
