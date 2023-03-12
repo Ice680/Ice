@@ -53,8 +53,9 @@ void* alloc(size_t count) {
                         bitmap.set(i, true);
                     return reinterpret_cast<void*>(page * page_size);
                 }
-            } else
+            } else {
                 p = 0;
+            }
         }
         return nullptr;
     };

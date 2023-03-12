@@ -6,6 +6,7 @@
 #include <memory/physical.hpp>
 #include <memory/virtual.hpp>
 #include <sys/panic.hpp>
+#include "sys/logger.hpp"
 
 uintptr_t hhdm_offset = 0;
 
@@ -39,8 +40,12 @@ extern "C" void _start(void) {
     memory::physical::init();
     memory::paging::init();
 
-    printf("\nHello World!");
-    putchar('\n');
+    printf("\n");
+
+    logger::log_info("Total Memory: %i", memory::physical::total());
+    logger::log_info("Usable Memory: %i", memory::physical::usable());
+    logger::log_info("Used Memory: %i", memory::physical::used());
+    logger::log_info("Free Memory: %i", memory::physical::free());
 
     // panic::panic("Panic test");
 
