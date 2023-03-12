@@ -1,0 +1,41 @@
+#pragma once
+
+#include <type_traits>
+
+namespace std {
+template <typename _T>
+struct atomic {
+    using value_type = _T;
+
+    _T __value;
+
+    constexpr atomic() noexcept {}
+
+    constexpr atomic(_T __value) noexcept : __value(__value) {}
+};
+
+template <typename _T>
+bool atomic_compare_exchange_weak(
+    volatile atomic<_T>* __ptr, typename atomic<_T>::value_type* __expected,
+    typename atomic<_T>::value_type __desired) noexcept {
+    return __atomic_compare_exchange_n(&__ptr->__value, __expected, __desired,
+                                       true, __ATOMIC_SEQ_CST,
+                                       __ATOMIC_SEQ_CST);
+}
+
+template <typename _T>
+_T atomic_fetch_add(volatile atomic<_T>* __ptr, _T __value) noexcept {
+    return __atomic_fetch_add(&__ptr->__value, __value, __ATOMIC_SEQ_CST);
+}
+
+template <typename _T>
+_T atomic_fetch_sub(volatile atomic<_T>* __ptr, _T __value) noexcept {
+    return __atomic_fetch_sub(&__ptr->__value, __value, __ATOMIC_SEQ_CST);
+}
+
+template <typename _T>
+_T atomic_load(const volatile atomic<_T>* __ptr) noexcept {
+    return __atomic_load_n(&__ptr->__value, __ATOMIC_SEQ_CST);
+}
+
+}  // namespace std

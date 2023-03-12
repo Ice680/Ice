@@ -4,6 +4,7 @@
 #include <drivers/graphics/terminal.hpp>
 #include <kernel.hpp>
 #include <memory/physical.hpp>
+#include <memory/virtual.hpp>
 #include <sys/panic.hpp>
 
 uintptr_t hhdm_offset = 0;
@@ -17,6 +18,14 @@ volatile limine_terminal_request terminal_request{.id = LIMINE_TERMINAL_REQUEST,
 volatile limine_memmap_request memmap_request{.id = LIMINE_MEMMAP_REQUEST,
                                               .revision = 0};
 
+volatile limine_kernel_file_request kernel_file_request{
+    .id = LIMINE_KERNEL_FILE_REQUEST,
+    .revision = 0};
+
+volatile limine_kernel_address_request kernel_address_request{
+    .id = LIMINE_KERNEL_ADDRESS_REQUEST,
+    .revision = 0};
+
 extern "C" void _start(void) {
     hhdm_offset = hhdm_request.response->offset;
 
@@ -28,6 +37,7 @@ extern "C" void _start(void) {
     system::cpu::interrupts_enable();
 
     memory::physical::init();
+    memory::paging::init();
 
     printf("\nHello World!");
     putchar('\n');

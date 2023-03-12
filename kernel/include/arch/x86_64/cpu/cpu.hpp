@@ -2,10 +2,24 @@
 
 #include <cstdint>
 
+#define wrreg(reg, val) asm volatile("mov %0, %%" #reg ::"r"(val) : "memory");
+
+#define rdreg(reg)                                                \
+    ({                                                            \
+        uintptr_t val;                                            \
+        asm volatile("mov %%" #reg ", %0" : "=r"(val)::"memory"); \
+        val;                                                      \
+    })
+
 namespace system::cpu {
 void interrupts_enable();
 void interrupts_disable();
 [[noreturn]] void halt(bool ints = false);
+
+void invlpg(uint64_t addr);
+
+bool id(uint32_t leaf, uint32_t subleaf, uint32_t& eax, uint32_t& ebx,
+        uint32_t& ecx, uint32_t& edx);
 
 struct cpu_interrupt_state_t {
     uint64_t r15;

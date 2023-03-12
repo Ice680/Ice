@@ -23,12 +23,15 @@ add_executable(
     arch/${ARCH}/cpu/cpu.cpp
     arch/${ARCH}/interrupts/idt.cpp
     arch/${ARCH}/interrupts/isr.cpp
+    arch/${ARCH}/memory/virtual.cpp
 
     sys/logger.cpp
     sys/panic.cpp
 
     memory/memory.cpp
     memory/physical.cpp
+    memory/virtual.cpp
+    memory/memmap.cpp
 
     utils/bitmap.cpp
 )

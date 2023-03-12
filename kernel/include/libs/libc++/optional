@@ -2,19 +2,12 @@
 
 #include <new>
 #include <utility>
+#include <type_traits>
 
 namespace std {
 struct null_opt_type {};
 
-static constexpr null_opt_type null_opt;
-
-template<size_t Size, size_t Align>
-struct alignas(Align) aligned_storage {
-	constexpr aligned_storage()
-	: buffer{0} { }
-
-	char buffer[Size];
-};
+static constexpr null_opt_type nullopt;
 
 template <typename T>
 class optional {

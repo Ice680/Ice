@@ -741,4 +741,28 @@ struct alignas(Align) aligned_storage {
 
     char buffer[Size];
 };
+
+template <typename T>
+struct _Not : false_type {};
+
+template <>
+struct _Not<false_type> : true_type {};
+
+template <typename...>
+struct _And;
+
+template <>
+struct _And<> : true_type {};
+
+template <typename _1>
+struct _And<_1> : _1 {};
+
+template <typename... _Conditions>
+struct _Requires : enable_if<_And<_Conditions...>::value> {};
+
+template <typename T>
+struct _IsRef : is_reference<T> {};
+
+template <typename T>
+struct _NotRef : _Not<_IsRef<T>> {};
 }  // namespace std

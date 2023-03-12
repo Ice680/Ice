@@ -1,0 +1,74 @@
+#pragma once
+
+#include <cstddef>
+#include <type_traits>
+
+namespace std {
+template <typename T>
+class reverse_iterator {
+    T _it;
+
+   public:
+    reverse_iterator() = default;
+
+    constexpr explicit reverse_iterator(T it) : _it(it) {}
+
+    constexpr T base() const { return _it; }
+
+    constexpr reverse_iterator operator++(int) {
+        reverse_iterator __tmp = *this;
+        ++(*this);
+        return __tmp;
+    }
+
+    constexpr reverse_iterator operator--(int) {
+        reverse_iterator __tmp = *this;
+        ++(*this);
+        return __tmp;
+    }
+
+    constexpr auto operator++() -> reverse_iterator& {
+        --_it;
+        return *this;
+    }
+
+    constexpr auto operator--() -> reverse_iterator& {
+        ++_it;
+        return *this;
+    }
+
+    constexpr auto operator+(size_t __n) -> reverse_iterator {
+        return reverse_iterator(_it - __n);
+    }
+
+    constexpr auto operator-(size_t __n) -> reverse_iterator {
+        return reverse_iterator(_it + __n);
+    }
+
+    constexpr auto operator+=(size_t __n) -> reverse_iterator& {
+        _it -= __n;
+        return *this;
+    }
+
+    constexpr auto operator-=(size_t __n) -> reverse_iterator& {
+        _it += __n;
+        return *this;
+    }
+
+    constexpr bool operator==(const reverse_iterator& __other) const {
+        return _it == __other._it;
+    }
+
+    constexpr bool operator!=(const reverse_iterator& __other) const {
+        return _it != __other._it;
+    }
+
+    constexpr auto operator->() -> T { return _it - 1; }
+
+    constexpr auto operator*() const -> decltype(auto) { return *(_it - 1); }
+};
+
+struct default_sentinel_t {};
+
+inline constexpr default_sentinel_t default_sentinel{};
+}  // namespace std

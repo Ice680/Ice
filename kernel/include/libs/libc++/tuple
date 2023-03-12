@@ -35,7 +35,7 @@ struct storage<T, Types...> {
 };
 
 template <>
-struct storage<>;
+struct storage<> {};
 
 template <int n, typename... Types>
 struct nth_type;

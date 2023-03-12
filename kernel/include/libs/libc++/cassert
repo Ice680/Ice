@@ -1,0 +1,7 @@
+#pragma once
+
+#include <assert.h>
+
+namespace std {
+using ::assert_fail;
+} // namespace std

@@ -1,7 +1,9 @@
+#include <assert.h>
+#include <stdio.h>
+
 #include <source_location>
 #include <sys/logger.hpp>
 #include <sys/panic.hpp>
-#include <stdio.h>
 
 namespace panic {
 [[noreturn]] void panic(const char* file, int line, const char* func,
@@ -28,3 +30,8 @@ extern "C" [[noreturn]] void abort() noexcept {
     panic("abort()");
 }
 }  // namespace panic
+
+extern "C" void assert_fail(const char* message, const char* file, int line,
+                            const char* func) {
+    panic::panic(file, line, func, message);
+}

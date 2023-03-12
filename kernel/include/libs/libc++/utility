@@ -86,4 +86,34 @@ struct source_location {
     uint32_t line_ = 0;
     uint32_t column_ = 0;
 };
+
+template <class T1, class T2>
+struct pair {
+    using first_type = T1;
+    using second_type = T2;
+
+    first_type first;
+    second_type second;
+
+    constexpr pair() = default;
+
+    constexpr pair(first_type const& f, second_type const& s)
+        : first(f), second(s) {}
+
+    template <class U, class V>
+    constexpr pair(const pair<U, V>& p) : first(p.first), second(p.second) {}
+
+    template <class U, class V>
+    pair<T1, T2>& operator=(const pair<U, V>& p) {
+        first = p.first;
+        second = p.second;
+        return *this;
+    }
+
+    template <class U, class V>
+    void operator=(const volatile pair<U, V>& p) volatile {
+        first = p.first;
+        second = p.second;
+    }
+};
 }  // namespace std
