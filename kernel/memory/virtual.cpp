@@ -15,7 +15,7 @@ namespace memory::paging {
 pagemap_t* kernel_pagemap = nullptr;
 
 void init() {
-    logger::log_info("Initializing Virtual Memory Management");
+    logger::log_info("Initializing Virtual Memory Manager");
 
     limine_memmap_entry** memmaps = memmap_request.response->entries;
     size_t memmap_count = memmap_request.response->entry_count;

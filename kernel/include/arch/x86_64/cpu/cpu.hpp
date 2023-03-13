@@ -14,14 +14,14 @@
 namespace system::cpu {
 void interrupts_enable();
 void interrupts_disable();
-[[noreturn]] void halt(bool ints = false);
+[[noreturn]] void halt(bool idt = false);
 
 void invlpg(uint64_t addr);
 
 bool id(uint32_t leaf, uint32_t subleaf, uint32_t& eax, uint32_t& ebx,
         uint32_t& ecx, uint32_t& edx);
 
-struct cpu_interrupt_state_t {
+struct [[gnu::packed]] cpu_interrupt_state_t {
     uint64_t r15;
     uint64_t r14;
     uint64_t r13;
@@ -38,7 +38,7 @@ struct cpu_interrupt_state_t {
     uint64_t rbx;
     uint64_t rax;
 
-    uint64_t isr_number;
+    uint64_t int_no;
     uint64_t error_code;
 
     uint64_t rip;
@@ -47,4 +47,34 @@ struct cpu_interrupt_state_t {
     uint64_t rsp;
     uint64_t ss;
 };
+
+static inline void out8(uint16_t port, uint8_t value) {
+    asm volatile("outb %0, %1" : : "a"(value), "Nd"(port));
+}
+
+static inline void out16(uint16_t port, uint16_t value) {
+    asm volatile("outw %0, %1" : : "a"(value), "Nd"(port));
+}
+
+static inline void out32(uint16_t port, uint32_t value) {
+    asm volatile("outl %0, %1" : : "a"(value), "Nd"(port));
+}
+
+static inline uint8_t in8(uint16_t port) {
+    uint8_t ret;
+    asm volatile("inb %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+}
+
+static inline uint16_t in16(uint16_t port) {
+    uint16_t ret;
+    asm volatile("inw %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+}
+
+static inline uint32_t in32(uint16_t port) {
+    uint32_t ret;
+    asm volatile("inl %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+}
 }  // namespace system::cpu

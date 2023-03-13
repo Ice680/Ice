@@ -78,10 +78,9 @@ if(QEMU_PROGRAM)
         # No networking drivers yet.
         # -net none
         # Show extra information regarding triple faults
-        # -d cpu_reset
+        -d cpu_reset
         # Use stdio as serial input and output
         # This allows debug messages to reach the terminal
-        # -serial stdio
         -serial stdio
         -boot d
     )

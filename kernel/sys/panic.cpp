@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include <source_location>
 #include <sys/logger.hpp>
 #include <sys/panic.hpp>
 

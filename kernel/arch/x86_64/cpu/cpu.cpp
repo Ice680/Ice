@@ -10,8 +10,8 @@ void interrupts_disable() {
     asm volatile("cli");
 }
 
-void halt(bool ints) {
-    if (ints)
+void halt(bool idt) {
+    if (idt)
         while (true)
             asm volatile("hlt");
     else

@@ -6,7 +6,7 @@
 #include <memory/physical.hpp>
 #include <memory/virtual.hpp>
 #include <sys/panic.hpp>
-#include "sys/logger.hpp"
+#include <sys/logger.hpp>
 
 uintptr_t hhdm_offset = 0;
 

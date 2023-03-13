@@ -3,8 +3,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_library(
     assembly
     arch/${ARCH}/gdt/gdt.asm
-    arch/${ARCH}/interrupts/idt.asm
-    arch/${ARCH}/interrupts/isr.asm
+    arch/${ARCH}/idt/idt.asm
 )
 string(APPEND CMAKE_ASM_NASM_COMPILE_OBJECT " -f elf64")
 
@@ -21,8 +20,8 @@ add_executable(
 
     arch/${ARCH}/gdt/gdt.cpp
     arch/${ARCH}/cpu/cpu.cpp
-    arch/${ARCH}/interrupts/idt.cpp
-    arch/${ARCH}/interrupts/isr.cpp
+    arch/${ARCH}/cpu/pic.cpp
+    arch/${ARCH}/idt/idt.cpp
     arch/${ARCH}/memory/virtual.cpp
 
     sys/logger.cpp
