@@ -18,7 +18,7 @@ $ ninja -C build run_qemu
 
 ## Roadmap
 - [X] GDT
-- [X} IDT
+- [X] IDT
 - [X] Interrupts (Partital)
 - [X] Physical Memory Manager
 - [X] Virtual Memory Manager
